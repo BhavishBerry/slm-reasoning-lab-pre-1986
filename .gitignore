@@ -1,0 +1,22 @@
+# Training Data (private - not to be shared)
+data/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Model checkpoints (can be large)
+checkpoints/
+*.pt
+*.pth
