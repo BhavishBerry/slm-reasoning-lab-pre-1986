@@ -12,39 +12,42 @@
 
 ## 📑 Table of Contents
 
-1. [Executive Summary](#1-executive-summary)
-2. [Core Research Question: The RBMK Reactivity Test](#2-core-research-question-the-rbmk-reactivity-test)
-3. [Project Philosophy & Constraints](#3-project-philosophy--constraints)
+- [From-Scratch Long-Context SLM (Small Language Model)](#from-scratch-long-context-slm-small-language-model)
+  - [📑 Table of Contents](#-table-of-contents)
+  - [1. Executive Summary](#1-executive-summary)
+  - [2. Core Research Question: The RBMK Reactivity Test](#2-core-research-question-the-rbmk-reactivity-test)
+    - [The Physics of the Problem](#the-physics-of-the-problem)
+    - [The "Clean Room" Experiment](#the-clean-room-experiment)
+    - [The Reasoning Test](#the-reasoning-test)
+  - [3. Project Philosophy \& Constraints](#3-project-philosophy--constraints)
     - [The Pre-1986 Knowledge Cutoff](#the-pre-1986-knowledge-cutoff)
     - [Reasoning Over Knowledge Retrieval](#reasoning-over-knowledge-retrieval)
     - [The Case for Small Models](#the-case-for-small-models)
-4. [Repository Manifest](#4-repository-manifest)
-5. [System Architecture: Deep Dive](#5-system-architecture-deep-dive)
+  - [4. Repository Manifest](#4-repository-manifest)
+  - [5. System Architecture: Deep Dive](#5-system-architecture-deep-dive)
     - [Model Configuration](#model-configuration)
     - [Component 1: Rotary Position Embeddings (RoPE)](#component-1-rotary-position-embeddings-rope)
     - [Component 2: Multi-Head Self-Attention](#component-2-multi-head-self-attention)
-    - [Component 3: Block-Local Sparse Attention](#component-3-block-local-sparse-attention-the-key-innovation)
-    - [Component 4: Feed-Forward Networks](#component-4-feed-forward-networks)
-    - [Component 5: The Transformer Block](#component-5-the-transformer-block)
-6. [Data Engineering Pipeline](#6-data-engineering-pipeline)
-    - [Data Sources & Philosophy](#data-sources--philosophy)
+    - [Component 3: Block-Local Sparse Attention (The Key Innovation)](#component-3-block-local-sparse-attention-the-key-innovation)
+    - [Component 4: Feed-Forward Networks \& Normalization](#component-4-feed-forward-networks--normalization)
+  - [6. Data Engineering Pipeline](#6-data-engineering-pipeline)
+    - [Data Sources \& Philosophy](#data-sources--philosophy)
     - [Tokenization Strategy (BPE)](#tokenization-strategy-bpe)
     - [Streaming Dataset Implementation](#streaming-dataset-implementation)
-7. [Training Protocols & Curriculum](#7-training-protocols--curriculum)
+  - [7. Training Protocols \& Curriculum](#7-training-protocols--curriculum)
     - [Phase A: Base Pretraining (Foundation)](#phase-a-base-pretraining-foundation)
     - [Phase B: Context Extension (Adaptation)](#phase-b-context-extension-adaptation)
     - [Phase C: Domain Fine-Tuning (Specialization)](#phase-c-domain-fine-tuning-specialization)
-    - [Optimization & Hyperparameters](#optimization--hyperparameters)
-8. [Evaluation Framework](#8-evaluation-framework)
-9. [Usage & Operations Manual](#9-usage--operations-manual)
+  - [8. Evaluation Framework](#8-evaluation-framework)
+  - [9. Usage \& Operations Manual](#9-usage--operations-manual)
     - [Environment Setup](#environment-setup)
     - [Hardware Requirements](#hardware-requirements)
     - [Step-by-Step Execution Guide](#step-by-step-execution-guide)
-10. [Theoretical Appendices](#10-theoretical-appendices)
+  - [10. Theoretical Appendices](#10-theoretical-appendices)
     - [Appendix A: The Mathematics of RoPE](#appendix-a-the-mathematics-of-rope)
     - [Appendix B: Attention Complexity Analysis](#appendix-b-attention-complexity-analysis)
-11. [Troubleshooting & FAQ](#11-troubleshooting--faq)
-12. [References & Citations](#12-references--citations)
+  - [11. Troubleshooting \& FAQ](#11-troubleshooting--faq)
+  - [12. References \& Citations](#12-references--citations)
 
 ---
 
@@ -139,6 +142,8 @@ train_slm/
 │   ├── 03_model_architecture.ipynb # THE CORE: Model Classes
 │   ├── 04_training_pipeline.ipynb  # THE ENGINE: Training Loop
 │   └── 05_evaluation.ipynb         # Testing & Metrics
+├── colab/
+│   └── master_slm_notebook.ipynb   # ALL-IN-ONE: Complete Pipeline
 ├── tokenizer/
 │   └── tokenizer.json              # Trained Vocabulary
 ├── configs/
